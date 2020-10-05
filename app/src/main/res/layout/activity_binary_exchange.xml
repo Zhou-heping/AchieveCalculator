@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".getLengthActivity">
+    tools:context=".BinaryExchangeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,12 +17,15 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
     </com.google.android.material.appbar.AppBarLayout>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         tools:ignore="MissingConstraints">
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -30,21 +33,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="输入的长度：">
-
-            </TextView>
-
-            <EditText
-                android:id="@+id/inputLength"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:inputType="numberDecimal"
-                android:text="0"></EditText>
+                android:text="输入的进制"></TextView>
 
             <TextView
+                android:id="@+id/spinner1_text"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"></TextView>
+
+            <Spinner
+                android:id="@+id/spinner1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="米"></TextView>
+                android:layout_height="match_parent" />
         </TableRow>
 
         <TableRow
@@ -54,19 +53,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="等于："></TextView>
+                android:text="输入的数"></TextView>
 
             <EditText
-                android:id="@+id/equalsDM"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="0"></EditText>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="分米"></TextView>
+                android:layout_height="match_parent"></EditText>
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -74,18 +67,33 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="等于："></TextView>
+                android:text="转换的进制"></TextView>
 
-            <EditText
-                android:id="@+id/equalsCM"
+            <TextView
+                android:id="@+id/spinner2_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="0"></EditText>
+                android:layout_height="match_parent" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="里米"></TextView>
+                android:text="结果是"></TextView>
+
+            <TextViewView
+                android:id="@+id/result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </TableRow>
     </TableLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

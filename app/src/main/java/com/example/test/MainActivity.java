@@ -1,5 +1,6 @@
 package com.example.test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -24,16 +26,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button zero, one, two, three, four, five, six, seven, eight, nine;
     Button clear, delete, div, mul, sub, add, equal, point, sin, persent,cos, sqrt, left, right;
     TextView result;
+    Intent intent;
     //定义锁定装置
     boolean pointLock1 = false;     // 1.防止一个数中有多个小数点
     boolean pointLock2 = false;     // 2.防止在运算符后连接小数点
     boolean opraterLock = false;    // 3.防止两个数之间输入多于两个运算符
     private final String tag = "MyTag";
-
+/*不用那个复杂，在AndroidManifest.xml中，子Activity中加上父Activity声明即可。
+<activity android:name=".ui.member.MemberDetailActivity" android:parentActivityName=".ui.MainActivity">
+比如这句话设置后，MemberDetailActivity就是MainActivity的子窗口，启动MemberDetailActivity后顶部栏就自动会有一个回退按钮。*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar=this.getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         //初始化按钮
         zero = findViewById(R.id.zero);
         one = findViewById(R.id.one);
@@ -86,6 +93,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          left.setOnClickListener(this);
         right.setOnClickListener(this);
         result.setOnClickListener(this);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu  menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+            case R.id.getlength://跳转到页面长度换算
+                intent = new Intent(MainActivity.this,getLengthActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.getbinary://跳转到进制换算
+                intent = new Intent(MainActivity.this,BinaryExchangeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.getvolume:////跳转到体积换算
+                intent = new Intent(MainActivity.this,BinaryExchangeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.help://跳转帮助
+                intent = new Intent(MainActivity.this,HelpActivity.class);
+                startActivity(intent);
+                break;
+            // case android.R.id.home:
+            //      this.finish();
+            //     return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onClick(View v) {
@@ -495,31 +534,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return stack.pop();
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu  menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch(id){
-            case R.id.item1:
-                //跳转到页面1
-                break;
-            case R.id.item2:
-                //跳转到页面2
-                break;
-            case R.id.item3:
-                //跳转到页面3
-                break;
-            case R.id.item4:
-                //跳转到页面4
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
 }
