@@ -6,21 +6,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.example.javaMethods.Calculator;
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button zero, one, two, three, four, five, six, seven, eight, nine;
@@ -32,15 +26,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean pointLock2 = false;     // 2.防止在运算符后连接小数点
     boolean opraterLock = false;    // 3.防止两个数之间输入多于两个运算符
     private final String tag = "MyTag";
-/*不用那个复杂，在AndroidManifest.xml中，子Activity中加上父Activity声明即可。
-<activity android:name=".ui.member.MemberDetailActivity" android:parentActivityName=".ui.MainActivity">
-比如这句话设置后，MemberDetailActivity就是MainActivity的子窗口，启动MemberDetailActivity后顶部栏就自动会有一个回退按钮。*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActionBar actionBar=this.getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        // ActionBar actionBar=this.getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);参考网上但是不能使用
         //初始化按钮
         zero = findViewById(R.id.zero);
         one = findViewById(R.id.one);
@@ -113,14 +105,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.getvolume:////跳转到体积换算
-                intent = new Intent(MainActivity.this,BinaryExchangeActivity.class);
+                intent = new Intent(MainActivity.this,getVolumeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.help://跳转帮助
                 intent = new Intent(MainActivity.this,HelpActivity.class);
                 startActivity(intent);
                 break;
-            // case android.R.id.home:
+            // case android.R.id.home://返回
             //      this.finish();
             //     return true;
         }
@@ -321,218 +313,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
-    static class Calculator {
-        public static Map<Character, Integer> priority = new HashMap<Character, Integer>();//设置符号优先级别
-
-        static {
-            priority.put('(', 0);
-            priority.put(')', 0);
-            priority.put('+', 1);
-            priority.put('-', 1);
-            priority.put('*', 2);
-            priority.put('/', 2);
-            priority.put('%', 3);
-            priority.put('^', 3);
-            priority.put('s', 3);
-            priority.put('c', 3);
-        }
-
-        public static String Judge(String express) {
-            // 开头为负数，如-1，改为0-1
-            if ('-' == express.charAt(0)) {
-                express = 0 + express;
-            }
-            //检查格式
-            if (!checkFormat(express)) {
-                return "表达式错误";
-            }
-            // 表达式标准化
-            express = changeToStandardFormat(express);
-            return express;
-
-        }
-
-        public static boolean checkFormat(String str) {
-            // 校验开头是否为数字或者“(”或者为s,c等
-            if (!(isNumber(str.charAt(0)) || str.charAt(0) == '(' || str.charAt(0) == 's' || str.charAt(0) == 'c')) {
-                return false;
-            }
-            char c;
-            // 校验
-            for (int i = 1; i < str.length() - 1; i++) {
-                c = str.charAt(i);
-                if (!(isNumber(c))) {
-                    if (c == '-' || c == '+' || c == '*' || c == '/' || c == '%' || c == 's' || c == 'c' || c == '^') {
-                        if (c == '-' && str.charAt(i - 1) == '(') {//跳过左括号后面为负数的情况
-                            continue;
-                        }
-                        // 若符号前一个不是数字或者）或者%时
-                        if (!(isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')')) {
-                            return false;
-                        }
-                    }
-                    if (c == '.') {
-                        if (!isNumber(str.charAt(i - 1)) || !isNumber(str.charAt(i + 1))) {// 校验“.”的前后是否为数字
-                            return false;
-                        }
-                    }
-                }
-            }
-            return isBracketCouple(str);// 校验括号是否配对
-        }
-
-        // 括号是否匹配
-        public static boolean isBracketCouple(String str) {
-            Stack<Character> stack = new Stack<Character>();
-            for (char c : str.toCharArray()) {
-                if (c == '(') {
-                    stack.push(c);
-                }
-                if (c == ')') {//遇到一个右括号，即移除一个左括号
-                    if (stack.isEmpty()) {
-                        return false;
-                    }
-                    stack.pop();
-                }
-            }
-            if (stack.isEmpty()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        // 处理表达式格式为标准格式
-        public static String changeToStandardFormat(String str) {
-            StringBuilder s = new StringBuilder();//可变字符序列
-            char c;
-            for (int i = 0; i < str.length(); i++) {
-                c = str.charAt(i);
-                if (i != 0 && c == '(' && (isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')')) {
-                    s.append("*(");
-                    continue;
-                }
-                if (c == '-' && str.charAt(i - 1) == '(') {
-                    s.append("0-");
-                    continue;
-                }
-                s.append(c);
-            }
-            return s.toString();
-        }
-
-
-        public static boolean isNumber(char c) {
-            if (c >= '0' && c <= '9')
-                return true;
-            else
-                return false;
-        }
-
-        //实现转变为后缀表达式
-        public static List<String> exchange(String express) {
-            Stack<Character> stack = new Stack<Character>();
-            List<String> list = new ArrayList<String>();
-            String temp = "";
-            char op;
-            int i = 0;
-            while (i < express.length()) {
-                if (express.charAt(i) == '=') {
-                    break;
-                }
-                if (isNumber(express.charAt(i))) {//如果是数字，则继续判断，直到不为小数点或者数字为止
-                    temp = temp + express.charAt(i++);
-                    while (express.charAt(i) == '.' || isNumber(express.charAt(i))) {
-                        temp = temp + express.charAt(i++);
-                    }
-                    list.add(temp);
-                    temp = "";
-                } else {//否则为运算符
-                    //由于栈为空，所以第一个运算符直接入栈
-                    if (!stack.isEmpty()) {
-                        if (express.charAt(i) == '(') {//如果是左括号，入栈
-                            stack.push(express.charAt(i++));
-                        } else if (express.charAt(i) == ')') {//如果是右括号，弹栈，直到弹出左括号为止
-                            op = stack.pop();
-                            while (op != '(') {
-                                list.add(op + "");
-                                op = stack.pop();
-                            }
-                            i++;
-                        } else {
-                            op = stack.peek();
-                            if (priority.get(op) < priority.get(express.charAt(i))) {
-                                stack.push(express.charAt(i++));
-                            } else {
-                                op = stack.pop();
-                                list.add(op + "");
-
-                            }
-
-                        }
-                    } else {
-                        stack.push(express.charAt(i++));
-                    }
-                }
-
-            }
-            while (!stack.isEmpty()) {
-                list.add(stack.pop() + "");
-            }
-            return list;
-        }
-
-        public static String doCalculator(List<String> list) {
-            String result = null;
-            Stack<String> stack = new Stack<>();
-            double num1 = 0, num2 = 0;
-            for (String str : list) {
-                //如果不为运算符则为数字，将其入栈
-                if (!(str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/")
-                        || str.equals("%") || str.equals("^") || str.equals("c") || str.equals("s"))) {
-                    stack.push(str);
-                } else {
-                    num1 = Double.parseDouble(stack.pop());
-                    if (str.equals("s")) {//求sin运算
-                        stack.push(Math.sin(Math.PI * num1 / 180) + "");
-
-                    } else if (str.equals("c")) {//求cos运算
-                        stack.push(Math.cos(Math.PI * num1 / 180) + "");
-                    } else if (str.equals("%")) {//求%运算
-                        stack.push(num1 / 100 + "");
-                    } else {
-                        num2 = Double.parseDouble(stack.pop());
-                        switch (str) {
-                            case "+":
-                                stack.push(num1 + num2 + "");
-                                break;
-                            case "-":
-                                stack.push(num2 - num1 + "");
-                                break;
-                            case "*":
-                                stack.push(num1 * num2 + "");
-                                break;
-                            case "/":
-                                if (num1 == 0) {
-                                    result = "表达式错误";
-                                    stack.push(0 + "");
-                                } else {
-                                    stack.push(num2 / num1 + "");
-                                }
-                                break;
-                            case "^":
-                                stack.push(Math.pow(num2, num1) + "");
-                                break;
-                        }
-                    }
-                }
-
-            }
-            if (result != null)
-                return result;
-            return stack.pop();
-        }
-    }
-
 }

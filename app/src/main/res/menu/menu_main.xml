@@ -11,19 +11,19 @@
     <item
         android:id="@+id/getbinary"
         android:orderInCategory="100"
-        android:title="test2"
+        android:title="进制换算"
         app:showAsAction="never"
         android:onClick="onOptionsItemSelected"/>
     <item
         android:id="@+id/getvolume"
         android:orderInCategory="100"
-        android:title="test3"
+        android:title="体积换算"
         app:showAsAction="never"
         android:onClick="onOptionsItemSelected"/>
     <item
         android:id="@+id/help"
         android:orderInCategory="100"
-        android:title="test4"
+        android:title="帮助"
         app:showAsAction="never"
         android:onClick="onOptionsItemSelected"/>
 </menu>

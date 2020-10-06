@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -11,14 +12,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class getLengthActivity extends AppCompatActivity  {
-    private EditText input,equalDM,equalCM;
-    double resultDM,resultCM;
+    private EditText inputM,inputDM,inputCM;
+    double resultM,resultDM,resultCM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.getlength);
-        input = findViewById(R.id.inputLength);
-        input.addTextChangedListener(new TextWatcher(){
+        //对文本框编辑
+        inputM = findViewById(R.id.inputLengthM);
+        inputDM = findViewById(R.id.inputLengthDM);
+        inputCM = findViewById(R.id.inputLengthCM);
+
+        inputM.addTextChangedListener(new TextWatcher(){
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+            }
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
+            public void afterTextChanged(Editable arg0) {
+                // 文字改变后出发事件
+                resultM = Double.parseDouble(inputM.getText().toString());
+                inputDM.setText(resultM*10+"");
+                inputCM.setText(resultM*100+"");
+            }
+        });
+        inputDM.addTextChangedListener(new TextWatcher(){
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3) {
@@ -29,18 +49,27 @@ public class getLengthActivity extends AppCompatActivity  {
             }
             public void afterTextChanged(Editable arg0) {
                 // 文字改变后出发事件
-                String content = input.getText().toString();
-                System.out.println(content);
-                //若输入框内容为空按钮可点击，字体为蓝色
-                resultDM = Double.parseDouble(content);
-                equalDM.setText(resultDM*100+"");
-
-                resultCM = Double.parseDouble(content);
-                equalCM.setText(resultDM*10000+"");
+                resultDM = Double.parseDouble(inputDM.getText().toString());
+                inputM.setText(resultDM/10.0+"");
+                inputCM.setText(resultDM*10+"");
             }
         });
-        equalDM = findViewById(R.id.equalsDM);
-        equalCM =findViewById(R.id.equalsCM);
+        inputCM.addTextChangedListener(new TextWatcher(){
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+            }
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+
+            }
+            public void afterTextChanged(Editable arg0) {
+                // 文字改变后出发事件
+                resultCM = Double.parseDouble(inputCM.getText().toString());
+                inputDM.setText(resultCM/10.0+"");
+                inputM.setText(resultCM/100.0+"");
+            }
+        });
     }
 
 }

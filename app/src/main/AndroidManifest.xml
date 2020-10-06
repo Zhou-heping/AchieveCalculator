@@ -9,25 +9,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".getVolumeActivity"></activity>
-        <activity android:name=".HelpActivity" />
-        <activity
-            android:name=".BinaryExchangeActivity"
-            android:label="@string/title_activity_binary_exchange"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".getLengthActivity" />
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
+            android:label="计算器"
             android:screenOrientation="sensor"
-            android:theme="@style/AppTheme.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".getVolumeActivity"
+            android:label="体积换算"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".getLengthActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="长度换算"/>
+
+        <activity
+            android:name=".BinaryExchangeActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="进制转换"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".HelpActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="帮助"/>
     </application>
 
 </manifest>
