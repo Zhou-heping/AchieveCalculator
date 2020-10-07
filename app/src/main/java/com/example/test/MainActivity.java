@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // ActionBar actionBar=this.getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);参考网上但是不能使用
         //初始化按钮
         zero = findViewById(R.id.zero);
         one = findViewById(R.id.one);
@@ -113,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             // case android.R.id.home://返回
-            //      this.finish();
-            //     return true;
+            //   this.finish();
+            //   return true;
         }
         return super.onOptionsItemSelected(item);
     }

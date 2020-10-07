@@ -33,12 +33,19 @@ public class getLengthActivity extends AppCompatActivity  {
             }
             public void afterTextChanged(Editable arg0) {
                 // 文字改变后出发事件
-                resultM = Double.parseDouble(inputM.getText().toString());
-                inputDM.setText(resultM*10+"");
-                inputCM.setText(resultM*100+"");
+                if(inputM.getText().toString().equals("")){
+                    inputDM.setText("");
+                    inputCM.setText("");
+                }
+                else{
+                    resultM = Double.parseDouble(inputM.getText().toString());
+                    inputDM.setText(resultM*10+"");
+                    inputCM.setText(resultM*100+"");
+                }
             }
         });
-        inputDM.addTextChangedListener(new TextWatcher(){
+
+        /*inputDM.addTextChangedListener(new TextWatcher(){
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3) {
@@ -69,7 +76,7 @@ public class getLengthActivity extends AppCompatActivity  {
                 inputDM.setText(resultCM/10.0+"");
                 inputM.setText(resultCM/100.0+"");
             }
-        });
+        });*/
     }
 
 }
