@@ -20,7 +20,7 @@ public class BinaryExchangeActivity extends AppCompatActivity {
     private EditText input;
     private Spinner spinner1,spinner2;
     private int binary1,binary2;//用于计算验证输入的进制是否合理
-    private String inputNumber;
+    private String inputNumber="";
     private ArrayAdapter<CharSequence> adapter;
     BinaryExchange be = new BinaryExchange();
     private String tag = "结果观测： ";
@@ -44,7 +44,6 @@ public class BinaryExchangeActivity extends AppCompatActivity {
                     Toast.makeText(BinaryExchangeActivity.this,adapterView.getItemAtPosition(position).toString(),Toast.LENGTH_LONG).show();
                 }
                 if(!inputNumber.isEmpty()){
-                    inputNumber = input.getText().toString();
                     binary1 = Integer.parseInt(spinner1.getSelectedItem().toString());
                     binary2 = Integer.parseInt(spinner2.getSelectedItem().toString());
                     result_view.setText(be.change(inputNumber,binary1,binary2));
@@ -61,7 +60,6 @@ public class BinaryExchangeActivity extends AppCompatActivity {
                     Toast.makeText(BinaryExchangeActivity.this,adapterView.getItemAtPosition(position).toString(),Toast.LENGTH_LONG).show();
                 }
                 if(!inputNumber.isEmpty()){
-                    inputNumber = input.getText().toString();
                     binary1 = Integer.parseInt(spinner1.getSelectedItem().toString());
                     binary2 = Integer.parseInt(spinner2.getSelectedItem().toString());
                     result_view.setText(be.change(inputNumber,binary1,binary2));
@@ -84,8 +82,6 @@ public class BinaryExchangeActivity extends AppCompatActivity {
                 binary1 = Integer.parseInt(spinner1.getSelectedItem().toString());
                 binary2 = Integer.parseInt(spinner2.getSelectedItem().toString());
                 //Log.e(tag,inputNumber);
-                // Log.e(tag,binary1+"");
-                // Log.e(tag,binary2+"");
                 result_view.setText(be.change(inputNumber,binary1,binary2));
             }
         });
