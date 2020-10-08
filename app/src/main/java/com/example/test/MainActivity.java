@@ -11,7 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.javaMethods.Calculator;
 import java.util.List;
@@ -86,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public boolean onCreateOptionsMenu(Menu  menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -214,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 //如果前一位不为小数点和运算符和数字才能摁下sin运算符按键
-                else if (str.charAt(str.length() - 1) != '.' && !opraterLock||cal.isNumber(str.charAt(str.length() - 1))) {
+                else if (str.charAt(str.length() - 1) != '.' && cal.isNumber(str.charAt(str.length() - 1))) {
                     pointLock1 = false;
                     pointLock2 = true;
                     opraterLock = true;
