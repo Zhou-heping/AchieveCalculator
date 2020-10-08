@@ -253,13 +253,14 @@
         </LinearLayout>
     </TableLayout>
     <Button
-        android:id="@+id/sqrt"
+        android:id="@+id/button_sin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="开方"
+        android:text="sin"
         android:visibility="gone"
         android:textSize="45sp"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        />
     <Button
         android:id="@+id/button_cos"
         android:layout_width="match_parent"
@@ -268,6 +269,41 @@
         android:visibility="gone"
         android:textSize="45sp"
         android:textColor="#000000" />
+    <Button
+        android:id="@+id/button_tan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Tan"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="45sp" />
+    <Button
+        android:id="@+id/button_power"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="^"
+        android:visibility="gone"
+        android:textColor="#000000"
+        android:textSize="45sp" />
+    <Button
+        android:id="@+id/button_factorial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="x!"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="45sp" />
+    <Button
+        android:id="@+id/button_ln"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="ln"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="45sp" />
     <Button
         android:id="@+id/left"
         android:layout_width="match_parent"
@@ -284,15 +320,6 @@
         android:visibility="gone"
         android:textSize="45sp"
         android:textColor="#000000" />
-    <Button
-        android:id="@+id/button_sin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="sin"
-        android:visibility="gone"
-        android:textSize="45sp"
-        android:textColor="#000000"
-        />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

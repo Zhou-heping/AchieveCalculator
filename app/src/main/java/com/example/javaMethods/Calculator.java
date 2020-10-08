@@ -3,7 +3,6 @@ package com.example.javaMethods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -36,15 +35,19 @@ public class Calculator {
         priority.put('-', 1);
         priority.put('*', 2);
         priority.put('/', 2);
-        priority.put('%', 3);
-        priority.put('^', 3);
-        priority.put('s', 3);
-        priority.put('c', 3);
+        priority.put('^', 3);// 乘方（幂）
+        priority.put('%', 4);
+        priority.put('s', 4);// sin
+        priority.put('c', 4);// cos
+        priority.put('!', 4);// 阶乘
+        priority.put('t', 4);// tan
+        priority.put('l', 4);// ln
     }
 
     public static String Judge(String express) {
         // 表达式标准化
         express = changeToStandardFormat(express);
+
         System.out.println("标准化后结果为：" + express);
         // 检查格式
         if (!checkFormat(express)) {
@@ -54,9 +57,46 @@ public class Calculator {
 
     }
 
+    // 处理表达式格式为标准格式
+    public static String changeToStandardFormat(String str) {
+        // 开头为负数，如-1，改为0-1
+        if ('-' == str.charAt(0)) {
+            str = 0 + str;
+        }
+        // 处理字符串至简单字符串，减少后面判断后处理的复杂性
+        str = str.replaceAll("Sin", "s");
+        str = str.replaceAll("Cos", "c");
+        str = str.replaceAll("Tan", "t");
+        str = str.replaceAll("ln", "l");
+        str = str.replaceAll("x", "*");
+        str = str.replaceAll("÷", "/");
+        System.out.println("str is :" + str);
+        StringBuilder s = new StringBuilder();// 可变字符序列
+        char c;
+        for (int i = 0; i < str.length(); i++) {
+            c = str.charAt(i);
+            if (i != 0 && c == '(' && (isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')')) {
+                s.append("*(");
+                continue;
+            }
+            if (i != 0 && str.charAt(i - 1) == '(' && c == '-') {
+                s.append("0-");
+                continue;
+            }
+            if (i != 0 && str.charAt(i - 1) == ')' && (c == 's' || c == 'c' || c == 't' || c == 'l' || isNumber(c))) {// 如果)括号后面接的是数字或者s，或者c，则变为*c
+                s.append("*");
+                s.append(c);
+                continue;
+            }
+            s.append(c);
+        }
+        return s.toString();
+    }
+
+    // 检查格式
     public static boolean checkFormat(String str) {
-        // 校验开头是否为数字或者“(”或者为s,c等
-        if (!(isNumber(str.charAt(0)) || str.charAt(0) == '(' || str.charAt(0) == 's' || str.charAt(0) == 'c')) {
+        // 校验开头是否为数字或者“(”或者为s,c,t,l等
+        if (!(isNumber(str.charAt(0)) || str.charAt(0) == '(' || isFunction(str.charAt(0)))) {
             return false;
         }
         char c;
@@ -64,23 +104,16 @@ public class Calculator {
         for (int i = 1; i < str.length() - 1; i++) {
             c = str.charAt(i);
             if (!(isNumber(c))) {// 如果为运算符则进行判断
-                if (c == '.') {// 校验 . 或 ^ 的前后是否为数字
-                    if (!isNumber(str.charAt(i - 1)) || !isNumber(str.charAt(i + 1))) {
-                        return false;
-                    }
-                }
-                else if(c == '('||c == ')'){
+                if (c == '(' || c == ')') {// 跳过左右括号
                     continue;
-                }
-                else {//不为小数点的运算符
-                    if(str.charAt(i) == 'c' || str.charAt(i) == 's'){//sin,cos前面可以有运算符
-                        if(!(str.charAt(i - 1) == '+' || str.charAt(i - 1) == '-' || str.charAt(i - 1) == '*'
-                                || str.charAt(i - 1) == '/'||isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')'))
+                } else {
+                    if (isFunction(str.charAt(i))) {// sin,cos,tan,ln前面可以有运算符,即前面为运算符和数字或者该函数的嵌套,或者^
+                        if (!(isOperator(str.charAt(i - 1)) || isNumber(str.charAt(i - 1))
+                                || isFunction(str.charAt(i - 1)) || str.charAt(i - 1) == '^'))
                             return false;
-                    }
-                    else{//其他的运算符前面不能有运算符，除开%
-                        if (!(isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')' || str.charAt(i - 1) == '%')) {// 若符号前一个不是数字或者“）”时
-                            return false;
+                    } else {// 其他的运算符前面不能有运算符，除开%，!
+                        if (!(isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')' || str.charAt(i - 1) == '%'
+                                || str.charAt(i - 1) == '!')) {
                         }
                     }
                 }
@@ -108,45 +141,6 @@ public class Calculator {
         } else {
             return false;
         }
-    }
-
-    // 处理表达式格式为标准格式
-    public static String changeToStandardFormat(String str) {
-        // 开头为负数，如-1，改为0-1
-        if ('-' == str.charAt(0)) {
-            str = 0 + str;
-        }
-        str = str.replaceAll("sin", "s");
-        str = str.replaceAll("cos", "c");
-        System.out.println("str is :" + str);
-        StringBuilder s = new StringBuilder();// 可变字符序列
-        char c;
-        for (int i = 0; i < str.length(); i++) {
-            c = str.charAt(i);
-            if (i != 0 && c == '(' && (isNumber(str.charAt(i - 1)) || str.charAt(i - 1) == ')')) {
-                s.append("*(");
-                continue;
-            }
-            if (i != 0 && str.charAt(i - 1) == '(' && c == '-') {
-                s.append("0-");
-                continue;
-            }
-            if (i != 0 && str.charAt(i - 1) == ')'&&(c == 's' || c == 'c'|| isNumber(c))) {// 如果)括号后面接的是数字或者s，或者c，则变为*c
-                s.append("*");
-                s.append(c);
-                continue;
-            }
-
-            s.append(c);
-        }
-        return s.toString();
-    }
-
-    public static boolean isNumber(char c) {
-        if (c >= '0' && c <= '9')
-            return true;
-        else
-            return false;
     }
 
     // 实现转变为后缀表达式
@@ -183,9 +177,10 @@ public class Calculator {
                         i++;
                     } else {
                         op = stack.peek();
+                        //如果栈顶运算符优先级别小于下一个符号优先级，则入栈
                         if (priority.get(op) < priority.get(express.charAt(i))) {
                             stack.push(express.charAt(i++));
-                        } else {
+                        } else {//弹出栈顶运算符，加入list中，然后继续往下判断，即下一个栈顶运算符号和该运算符比较
                             op = stack.pop();
                             list.add(op + "");
 
@@ -201,7 +196,7 @@ public class Calculator {
         }
         return list;
     }
-
+    //实现计算器，但是未实现函数的嵌套，如sinsin30等嵌套运算
     public static String doCalculator(List<String> list) {
         String result = null;
         Stack<String> stack = new Stack<>();
@@ -209,15 +204,27 @@ public class Calculator {
         for (String str : list) {
             // 如果不为运算符则为数字，将其入栈
             if (!(str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/") || str.equals("%")
-                    || str.equals("^") || str.equals("c") || str.equals("s"))) {
+                    || str.equals("^") || str.equals("!") || str.equals("c") || str.equals("t") || str.equals("l")
+                    || str.equals("s"))) {
                 stack.push(str);
-            } else {
+            }
+            // 否则为运算符
+            else {
                 num1 = Double.parseDouble(stack.pop());
                 if (str.equals("s")) {// 求sin运算
                     stack.push(Math.sin(Math.PI * num1 / 180) + "");
-
                 } else if (str.equals("c")) {// 求cos运算
                     stack.push(Math.cos(Math.PI * num1 / 180) + "");
+                } else if (str.equals("l")) {//求ln运算
+                    stack.push(Math.log(Math.PI * num1 / 180) + "");
+
+                } else if (str.equals("t")) {//求tan运算
+                    stack.push(Math.tan(Math.PI * num1 / 180) + "");
+
+                } else if (str.equals("!")) {//阶乘运算
+                    int number = (int)num1;
+                    stack.push(getFactorial(number)+ "");
+
                 } else if (str.equals("%")) {// 求%运算
                     stack.push(num1 / 100 + "");
                 } else {
@@ -251,5 +258,30 @@ public class Calculator {
         if (result != null)
             return result;
         return stack.pop();
+    }
+    public static double getFactorial(double number){
+        if(number==1)
+            return number;
+        else
+            return number*getFactorial(number-1);
+
+    }
+    public static boolean isFunction(char c) {
+        if (c == 's' || c == 'c' || c == 't' || c == 'l')
+            return true;
+        return false;
+    }
+
+    public static boolean isOperator(char c) {
+        if (c == '+' || c == '-' || c == '*' || c == '/')
+            return true;
+        return false;
+    }
+
+    public static boolean isNumber(char c) {
+        if (c >= '0' && c <= '9')
+            return true;
+        else
+            return false;
     }
 }

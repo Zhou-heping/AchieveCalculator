@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Calculator</string>
     <string name="title_activity_binary_exchange">BinaryExchangeActivity</string>
-    <string name="button_sin">Sin</string>
 </resources>
