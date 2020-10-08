@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean pointLock1 = false;     // 1.防止一个数中有多个小数点
     boolean pointLock2 = false;     // 2.防止在运算符后连接小数点
     boolean opraterLock = false;    // 3.防止两个数之间输入多于两个运算符,这里只将+，-，*，/，^作为运算符，方便对于sin等函数的判断
-    private final String tag = "MyTag";
+    private final String tag = "结果观测：";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         equal = findViewById(R.id.equal);//=
         point = findViewById(R.id.point);//小数点
         persent = findViewById(R.id.persent);//%，百分号
-        sin = findViewById(R.id.botton_sin);//求sin
+        sin = findViewById(R.id.sin);//求sin
         cos = findViewById(R.id.button_cos);//求cos
         tan = findViewById(R.id.button_tan);//求tan
         ln = findViewById(R.id.button_ln);//求ln
@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mul.setOnClickListener(this);
         sub.setOnClickListener(this);
         add.setOnClickListener(this);//+-*/监听
-        sin.setOnClickListener(this);
         cos.setOnClickListener(this);
         tan.setOnClickListener(this);
         ln.setOnClickListener(this);//sin,cos,tan,ln监听
@@ -91,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         left.setOnClickListener(this);
         right.setOnClickListener(this);//（）括号监听
         result.setOnClickListener(this);//结果的文本监听
+        sin.setOnClickListener(this);
     }
 
     @Override
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result.setText(str);
                 }
                 break;
-            case R.id.button_power:
+            case R.id.button_factorial:
                 if (str.equals("表达式错误")) {
                     str = "0";
                     result.setText(str);
@@ -228,11 +228,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (str.charAt(str.length() - 1) != '.' && !opraterLock && str.charAt(str.length() - 1) != 'n' && str.charAt(str.length() - 1) != 's') {
                     pointLock1 = false;
                     pointLock2 = true;//此时不锁住运算符，！后可以接运算符
-                    str += "^";
+                    str += "!";
                     result.setText(str);
                 }
                 break;
-            case R.id.button_factorial:
+            case R.id.button_power:
                 if (str.equals("表达式错误")) {
                     str = "0";
                     result.setText(str);
@@ -245,12 +245,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     pointLock1 = false;
                     pointLock2 = true;
                     opraterLock = true;
-                    str += "!";
+                    str += "^";
                     result.setText(str);
                 }
                 break;
             case R.id.button_cos:
-            case R.id.botton_sin:
+            case R.id.sin:
             case R.id.button_tan:
             case R.id.button_ln:
                 if (str.equals("表达式错误")) {
@@ -258,8 +258,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result.setText(str);
                 }
 
-                //如果前一位不为小数点，数字%,!才能摁下sin运算符按键(可以为n,s即嵌套sin，cos等计算)
-                else if (str.charAt(str.length() - 1) != '.' && cal.isNumber(str.charAt(str.length() - 1))) {
+                //如果前一位不为小数点，数字，%,!才能摁下sin运算符按键(可以为n,s即嵌套sin，cos等计算)
+                else if (str.charAt(str.length() - 1) != '.' && str.charAt(str.length() - 1) != '%'&&str.charAt(str.length() - 1) != '!' ) {
                     pointLock1 = false;
                     pointLock2 = true;
                     opraterLock = true;//按下这些键后，运算锁住，防止直接接运算符影响运算

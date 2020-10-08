@@ -28,6 +28,7 @@ public class BinaryExchangeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_binary_exchange);
+
         input = findViewById(R.id.inputNumber);
         result_view = findViewById(R.id.result_view);
 

@@ -13,7 +13,6 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".MainActivity"
         tools:showIn="@layout/activity_main">
 
@@ -162,7 +161,8 @@
                         android:id="@+id/mul"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="×"
+                        android:text="x"
+                        android:textAllCaps="false"
                         android:textSize="45sp"
                         android:textColor="#000000" />
                 </TableRow>
@@ -203,6 +203,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="÷"
+                        android:textAllCaps="false"
                         android:textSize="45sp"
                         android:textColor="#000000" />
 
@@ -253,11 +254,11 @@
         </LinearLayout>
     </TableLayout>
     <Button
-        android:id="@+id/button_sin"
+        android:id="@+id/sin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="sin"
-        android:visibility="gone"
+        android:text="Sin"
+        android:visibility="invisible"
         android:textSize="45sp"
         android:textColor="#000000"
         />
@@ -265,8 +266,8 @@
         android:id="@+id/button_cos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="cos"
-        android:visibility="gone"
+        android:text="Cos"
+        android:visibility="invisible"
         android:textSize="45sp"
         android:textColor="#000000" />
     <Button
@@ -274,7 +275,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Tan"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="45sp" />
@@ -283,7 +284,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="^"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textColor="#000000"
         android:textSize="45sp" />
     <Button
@@ -291,7 +292,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="x!"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="45sp" />
@@ -300,7 +301,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="ln"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="45sp" />
@@ -309,7 +310,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="("
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textSize="45sp"
         android:textColor="#000000" />
     <Button
@@ -317,7 +318,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text=")"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textSize="45sp"
         android:textColor="#000000" />
 

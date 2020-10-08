@@ -84,9 +84,11 @@ public class Calculator {
             }
             if (i != 0 && str.charAt(i - 1) == ')' && (c == 's' || c == 'c' || c == 't' || c == 'l' || isNumber(c))) {// 如果)括号后面接的是数字或者s，或者c，则变为*c
                 s.append("*");
-                s.append(c);
-                continue;
             }
+            if(i!=0 && isFunction(c) && isNumber(str.charAt(i - 1))){
+                s.append("*");
+            }
+
             s.append(c);
         }
         return s.toString();
