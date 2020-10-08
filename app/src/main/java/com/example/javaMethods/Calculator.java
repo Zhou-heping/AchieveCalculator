@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Stack;
 
 public class Calculator {
-   /* public static void main(String[] args) {
+    /*
+    public static void main(String[] args) {
         String express;
         System.out.println("请输入表达式：");
         Scanner input = new Scanner(System.in);
@@ -47,7 +47,6 @@ public class Calculator {
     public static String Judge(String express) {
         // 表达式标准化
         express = changeToStandardFormat(express);
-
         System.out.println("标准化后结果为：" + express);
         // 检查格式
         if (!checkFormat(express)) {
@@ -177,10 +176,11 @@ public class Calculator {
                         i++;
                     } else {
                         op = stack.peek();
-                        //如果栈顶运算符优先级别小于下一个符号优先级，则入栈
-                        if (priority.get(op) < priority.get(express.charAt(i))) {
+                        // 如果栈顶运算符优先级别小于等于下一个符号优先级，则入栈
+                        //此处需设置为小于等于，否则后面无法实现三角函数的嵌套运算
+                        if (priority.get(op) <= priority.get(express.charAt(i))) {
                             stack.push(express.charAt(i++));
-                        } else {//弹出栈顶运算符，加入list中，然后继续往下判断，即下一个栈顶运算符号和该运算符比较
+                        } else {// 弹出栈顶运算符，加入list中，然后继续往下判断，即下一个栈顶运算符号和该运算符比较
                             op = stack.pop();
                             list.add(op + "");
 
@@ -196,7 +196,8 @@ public class Calculator {
         }
         return list;
     }
-    //实现计算器，但是未实现函数的嵌套，如sinsin30等嵌套运算
+
+    // 实现计算器，特殊的如：sinsin30等嵌套运算
     public static String doCalculator(List<String> list) {
         String result = null;
         Stack<String> stack = new Stack<>();
@@ -258,14 +259,17 @@ public class Calculator {
         if (result != null)
             return result;
         return stack.pop();
-    }
-    public static double getFactorial(double number){
-        if(number==1)
-            return number;
-        else
-            return number*getFactorial(number-1);
 
     }
+
+    public static double getFactorial(double number) {
+        if (number == 1)
+            return number;
+        else
+            return number * getFactorial(number - 1);
+
+    }
+
     public static boolean isFunction(char c) {
         if (c == 's' || c == 'c' || c == 't' || c == 'l')
             return true;
@@ -285,3 +289,4 @@ public class Calculator {
             return false;
     }
 }
+
