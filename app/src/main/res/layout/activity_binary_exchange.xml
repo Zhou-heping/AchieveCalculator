@@ -4,78 +4,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BinaryExchangeActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10">
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="35sp"/>
-            <TextView
-                android:id="@+id/text_change"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="转"
-                android:layout_weight="1"
-                android:textSize="45dp" />
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="35sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="80"
-            android:orientation="vertical">
-        <TextView
-            android:id="@+id/inputNum"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="输入的数:"
-            android:layout_weight="1"
-            android:textSize="35sp" />
-        <EditText
-            android:id="@+id/inputNumber"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="bottom|end"
-            android:textSize="40sp"
-            android:layout_weight="4"
-            android:layout_below="@+id/inputNum"
-            />
+        android:layout_marginTop="50dp">
 
-        <TextView
-            android:id="@+id/resultView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="结果是:"
-            android:layout_weight="1"
-            android:textSize="35sp"
-            android:layout_below="@+id/inputNumber"/>
-        <TextView
-            android:id="@+id/result_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="bottom|end"
-            android:layout_weight="4"
-            android:singleLine="false"
-            android:textSize="40sp"
-            android:layout_below="@+id/resultView"/>
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10">
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text_change"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="转"
+                    android:textSize="35sp" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="80"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/inputNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="输入的数:"
+                    android:textSize="35sp" />
+
+                <EditText
+                    android:id="@+id/inputNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/inputNum"
+                    android:layout_weight="4"
+                    android:textSize="35sp" />
+
+                <TextView
+                    android:id="@+id/resultView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/inputNumber"
+                    android:layout_weight="1"
+                    android:text="结果是:"
+                    android:textSize="35sp" />
+
+                <TextView
+                    android:id="@+id/result_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/resultView"
+                    android:layout_weight="4"
+                    android:singleLine="false"
+                    android:textSize="35sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    android:layout_below="@+id/resultView"
+                    android:layout_weight="3"></TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

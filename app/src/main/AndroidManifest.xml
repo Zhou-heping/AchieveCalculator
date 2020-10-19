@@ -13,7 +13,7 @@
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:label="计算器"
-            android:screenOrientation="sensor">
+            android:screenOrientation="sensor"><!--设置页面横竖屏，sensor表示根据用户手势决定-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

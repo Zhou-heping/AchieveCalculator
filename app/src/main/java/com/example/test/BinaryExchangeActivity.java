@@ -31,7 +31,6 @@ public class BinaryExchangeActivity extends AppCompatActivity {
 
         input = findViewById(R.id.inputNumber);
         result_view = findViewById(R.id.result_view);
-
         spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
         adapter = ArrayAdapter.createFromResource(this,R.array.items,android.R.layout.simple_spinner_item);
