@@ -29,7 +29,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="12"
                 android:orientation="vertical">
 
                 <TextView
@@ -258,7 +258,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Sin"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textSize="45sp"
         android:textColor="#000000"
         />
@@ -267,7 +267,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Cos"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textSize="45sp"
         android:textColor="#000000" />
     <Button
@@ -275,7 +275,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Tan"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="45sp" />
@@ -284,7 +284,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="^"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textColor="#000000"
         android:textSize="45sp" />
     <Button
@@ -292,7 +292,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="x!"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="45sp" />
@@ -301,7 +301,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="ln"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="45sp" />
@@ -310,7 +310,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="("
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textSize="45sp"
         android:textColor="#000000" />
     <Button
@@ -318,17 +318,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text=")"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textSize="45sp"
         android:textColor="#000000" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="center"/>
     <!--app:popupTheme="@style/AppTheme.PopupOverlay" -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
