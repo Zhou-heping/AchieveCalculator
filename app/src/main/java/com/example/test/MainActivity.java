@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result.setText(str);
                 }
                 //如果前一位不为小数点才能摁下运算符按键，且不为n,s(即sin,cos,tan,ln的后缀)，但是！和%后是可以加运算符的
-                if (str.charAt(str.length() - 1) != '.' && !opraterLock && str.charAt(str.length() - 1) != 'n' && str.charAt(str.length() - 1) != 's') {
+                else if (str.charAt(str.length() - 1) != '.' && !opraterLock && str.charAt(str.length() - 1) != 'n' && str.charAt(str.length() - 1) != 's') {
                     pointLock1 = false;
                     pointLock2 = true;
                     opraterLock = true;
