@@ -119,9 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(intent);
                 break;
-            // case android.R.id.home://返回
-            //   this.finish();
-            //   return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -280,6 +278,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (str.equals("表达式错误")) {
                     str = "0";
                     result.setText(str);
+                }
+                if(str.equals(0)){
+                    str = "";
                 }
                 str += ((Button) v).getText();
                 result.setText(str);

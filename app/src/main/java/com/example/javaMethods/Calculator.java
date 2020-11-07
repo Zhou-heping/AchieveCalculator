@@ -69,7 +69,7 @@ public class Calculator {
         str = str.replaceAll("ln", "l");
         str = str.replaceAll("x", "*");
         str = str.replaceAll("÷", "/");
-        System.out.println("str is :" + str);
+        //System.out.println("str is :" + str);
         StringBuilder s = new StringBuilder();// 可变字符序列
         char c;
         for (int i = 0; i < str.length(); i++) {
