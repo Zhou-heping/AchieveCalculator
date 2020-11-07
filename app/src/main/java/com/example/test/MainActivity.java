@@ -189,10 +189,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     str = "0";
                     result.setText(str);
                 }
-                if (str.equals("0")) {
+                if (str.equals("0")&&((Button) v).getText().equals("-")) {
+                    str ="-";
+                    result.setText(str);
                     opraterLock = true;
                 }
-                //如果前一位不为小数点才能摁下运算符按键，且不为n,s(即sin,cos,tan,ln的后缀)，但是！后是可以加运算符的
+                if((str.length()>=1) && str.charAt(str.length() - 1)=='('){
+                    str += ((Button) v).getText();
+                    result.setText(str);
+                }
+                //如果前一位不为小数点才能摁下运算符按键，且不为n,s(即sin,cos,tan,ln的后缀)，但是！和%后是可以加运算符的
                 if (str.charAt(str.length() - 1) != '.' && !opraterLock && str.charAt(str.length() - 1) != 'n' && str.charAt(str.length() - 1) != 's') {
                     pointLock1 = false;
                     pointLock2 = true;
@@ -230,6 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result.setText(str);
                 }
                 break;
+
             case R.id.button_power:
                 if (str.equals("表达式错误")) {
                     str = "0";
@@ -279,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     str = "0";
                     result.setText(str);
                 }
-                if(str.equals(0)){
+                if(str.equals("0")){
                     str = "";
                 }
                 str += ((Button) v).getText();
