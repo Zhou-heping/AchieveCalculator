@@ -219,13 +219,17 @@ public class Calculator {
                 } else if (str.equals("c")) {// 求cos运算
                     stack.push(Math.cos(Math.PI * num1 / 180) + "");
                 } else if (str.equals("l")) {//求ln运算
-                    stack.push(Math.log(Math.PI * num1 / 180) + "");
+                    stack.push(Math.log( num1) + "");
 
                 } else if (str.equals("t")) {//求tan运算
                     stack.push(Math.tan(Math.PI * num1 / 180) + "");
 
                 } else if (str.equals("!")) {//阶乘运算
+                    if(num1 < 0){
+                        result = "表达式错误";
+                    }
                     int number = (int)num1;
+
                     stack.push(getFactorial(number)+ "");
 
                 } else if (str.equals("%")) {// 求%运算

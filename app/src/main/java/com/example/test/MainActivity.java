@@ -158,9 +158,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 pointLock2 = false;
                 opraterLock = false;
-                if (str.equals("0")) {
+                if (str.equals("0")&&!((Button) v).getText().equals("0")) {
                     str = "" + ((Button) v).getText();
-                } else {
+                } else if(str.equals("0")&&((Button) v).getText().equals("0")){
+                    str = "0";
+                }
+                else {
                     str += ((Button) v).getText();
                 }
                 result.setText(str);
