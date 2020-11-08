@@ -228,9 +228,10 @@ public class Calculator {
                     if(num1 < 0){
                         result = "表达式错误";
                     }
-                    int number = (int)num1;
-
-                    stack.push(getFactorial(number)+ "");
+                    else {
+                        int number = (int) num1;
+                        stack.push(getFactorial(number) + "");
+                    }
 
                 } else if (str.equals("%")) {// 求%运算
                     stack.push(num1 / 100 + "");

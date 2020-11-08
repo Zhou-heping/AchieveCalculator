@@ -297,7 +297,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //删除键
             case R.id.delete:
-                if (str.equals("表达式错误")) {
+                if (str.equals("表达式错误")||str.equals("NaN")||
+                        str.equals("-Infinity")||str.equals("Infinity")) {
                     str = "0";
                     result.setText(str);
                 }
